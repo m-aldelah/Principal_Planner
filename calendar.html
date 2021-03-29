@@ -2,10 +2,33 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
+<title>Calender</title>
 <link href="calendar.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+	<div id="container">
+		<div id="calendar">
+			<div id="header">
+				<button id="prevbutton">&lt</button>
+				<div id="date">
+					<h1 id="month">Month</h1>
+					<p id="subdate">currentDate</p>
+				</div>
+				<button id="nextbutton">&gt</button>
+			</div>
+			<div id="weekdays">
+				<div>Sunday</div>
+				<div>Monday</div>
+				<div>Tuesday</div>
+				<div>Wednesday</div>
+				<div>Thursday</div>
+				<div>Friday</div>
+				<div>Saturday</div>
+			</div>
+			<div id = days></div>
+		</div>
+	</div>
+	<script src="calendar.js"></script>
 </body>
 </html>
