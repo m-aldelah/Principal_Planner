@@ -71,6 +71,7 @@
 	margin: auto;
 }
 
+
 .day {
 	height: 90px;
 	width: 100px;
@@ -81,8 +82,56 @@
 	cursor: pointer;
 	box-sizing: border-box;
 	background-color: #EBEBEB;
+	font-size: 15px;
+	font-weight: normal;
 	box-shadow:0 0.50px 2px #000000; 
 }
+.day:hover {
+  background-color: #a6c5de;
+}
+#newEventModal{
+  display: none;
+  z-index: 20;
+  padding: 25px;
+  background-color: #e8f4fa;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 5px;
+  width: 350px;
+  top: 100px;
+  left: calc(50% - 175px);
+  position: absolute;
+  font-family: sans-serif;
+}
+
+#rescheduleEventModal{
+  display: none;
+  z-index: 20;
+  padding: 25px;
+  background-color: #e8f4fa;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 5px;
+  width: 350px;
+  top: 100px;
+  left: calc(50% - 175px);
+  position: absolute;
+  font-family: sans-serif;
+}
+
+.event {
+  font-size: 15px;
+  padding: 2px;
+  color: #3b80f7;
+  border-radius: 5px;
+  max-height: 55px;
+  overflow: hidden;
+	font-weight: bold;
+}
+#rescheduleEventText{
+	font-size: 20px;
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+	color: #0f90fa;
+}
+
 
 .extra {
     cursor: default;

@@ -26,9 +26,41 @@
 				<div>Friday</div>
 				<div>Saturday</div>
 			</div>
-			<div id = days></div>
+			<div id = "days"></div>
 		</div>
+		
 	</div>
+	<div id = "newEventModal"> 
+		<h2> <center> New Event </center></h2>
+		<input id="eventTitleInput" placeholder="Event Title" />
+		<button id="saveButton">Save</button>
+		<button id="cancelButton">Cancel</button>
+	</div>
+	
+	<div id="rescheduleEventModal">
+		<h2> <center> Event </center> </h2> 
+		<p id= "rescheduleEventText"> </p>
+		<form>
+    <div class="nativeDatePicker">
+      <label >Enter Your Rescheduling Date:</label>
+      <input type="date" id="newDate" name="date">
+      
+    </div>
+</form>
+		<button id="rescheduleButton"> Reschedule Event </button>
+		<center>
+		<button id="deleteButton"> Delete Event </button>
+		<button id="closeButton"> Close </button>
+		</center>
+	
+	</div>
+	
+
+	
+	<div id="modalBackDrop"> </div>
+	
+	
+	
 	<script src="calendar.js"></script>
 </body>
 </html>

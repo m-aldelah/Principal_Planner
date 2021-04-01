@@ -1,6 +1,26 @@
-var nav = 0;
-
+let nav = 0;
+var newEvent;
+let clicked = null;
+let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
+var rescheduleEventModal=document.getElementById('rescheduleEventModal');
+var newEventModal=document.getElementById('newEventModal');
+var backDrop =  document.getElementById('modalBackDrop');
 var days = document.getElementById('days');
+const eventTitleInput = document.getElementById('eventTitleInput');
+function openModal(date)
+{
+	clicked = date;
+	const eventForDay = events.find(e => e.date == clicked);
+	
+	if (eventForDay){
+		document.getElementById('rescheduleEventText').innerText = eventForDay.title;
+		rescheduleEventModal.style.display = 'block';
+		
+	}else{
+		newEventModal.style.display = 'block';
+	}
+	backDrop.style.display = 'block';
+}
 
 function render() {
 	var currDate = new Date();
@@ -70,9 +90,10 @@ function render() {
 	//Resets the calendar
 	days.innerHTML = '';
 	//Renders all the days on the calendar
-	for(var i = 1; i <= extraDays + numDays + endExtraDays; i++) {
+	for(let i = 1; i <= extraDays + numDays + endExtraDays; i++) {
 		var daySquare = document.createElement('div');
 		daySquare.classList.add('day');
+		
 		
 		if(i <= extraDays) {
 			daySquare.classList.add('extra');
@@ -81,7 +102,16 @@ function render() {
 		else if(i > extraDays && i <= extraDays + numDays) {
 			daySquare.innerText = i - extraDays;
 			
-			daySquare.addEventListener('click', () => console.log('click'));
+			const eventForDay = events.find(e => e.date == `${month+1}/${i-extraDays }/${year}`);
+			
+			if(eventForDay){ //if there is an event for the given day 
+				const eventDiv = document.createElement('div'); //create a div
+				eventDiv.classList.add('event'); //add a class
+				eventDiv.innerText= eventForDay.title; //edit the text
+				daySquare.appendChild(eventDiv); //put inside the dyasquare
+			}
+			
+			daySquare.addEventListener('click', () => openModal(`${month+1}/${i-extraDays }/${year}`));
 		}
 		else {
 			daySquare.classList.add('extra');
@@ -91,6 +121,69 @@ function render() {
 		days.appendChild(daySquare);
 	}
 }
+function closeModal() {
+	eventTitleInput.classList.remove('error'); //clearing error if it exists when closing
+	//closing modals when pressing cancel
+	newEventModal.style.display = 'none';
+	rescheduleEventModal.style.display = 'none';
+	backDrop.style.display='none';
+	
+	//clear the input thats in the next box
+	eventTitleInput.value = '';
+	clicked = null; //resetting the date clicked
+	render();
+	
+}
+/*
+function rescheduleEvent(){
+	var indexDate;
+	var newRescheduleDate = document.getElementById("newDate").value;
+	var dateParse = newRescheduleDate.split("-");
+	var eventName;
+	
+	var dateCombo = dateParse[1].replace(/^0+/, '')+ "/" +dateParse[2].replace(/^0+/, '') + "/" +dateParse[0];
+	//document.write(newEvent);
+	
+	
+			indexDate = events.date.findIndex(dateCombo);
+			eventName = events.title[indexDate];
+			document.write(eventName);
+		
+	//need to get name of event
+	
+	
+	events.push({ //creating event
+			date: dateCombo,
+			title: eventTitleInput.value,
+		});
+	localStorage.setItem('events', JSON.stringify(events));
+	closeModal();
+	
+	
+}
+*/
+
+function saveEvent()
+{
+	//newEvent = eventTitleInput.value();
+	if(eventTitleInput.value ){ //if there is a value available 
+		//save the event
+		eventTitleInput.classList.remove('error'); //want to remove the error if the event exists
+		events.push({ //creating event
+			date: clicked,
+			title: eventTitleInput.value,
+		});
+		
+		//need to store it in local storage
+		localStorage.setItem('events', JSON.stringify(events));
+		closeModal();
+	}
+	else{
+		//send an error
+		eventTitleInput.classList.add('error'); //creating a class called error
+	}
+}
+
 
 function setButtons() {
 	document.getElementById('nextbutton').addEventListener('click', () => {
@@ -102,6 +195,11 @@ function setButtons() {
 		nav--;
 		render();
 	});
+	document.getElementById('saveButton').addEventListener('click', saveEvent);
+	document.getElementById('cancelButton').addEventListener('click', closeModal);
+	
+	//document.getElementById('rescheduleButton').addEventListener('click', rescheduleEvent);
+	document.getElementById('closeButton').addEventListener('click', closeModal);
 }
-render();
 setButtons();
+render();
