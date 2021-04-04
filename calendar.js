@@ -134,34 +134,30 @@ function closeModal() {
 	render();
 	
 }
-/*
+
+
+
 function rescheduleEvent(){
-	var indexDate;
+	var eventNameRe = document.getElementById("rescheduleEventText").innerHTML;
+	//var indexDate;
 	var newRescheduleDate = document.getElementById("newDate").value;
 	var dateParse = newRescheduleDate.split("-");
-	var eventName;
+	//var eventName;
 	
 	var dateCombo = dateParse[1].replace(/^0+/, '')+ "/" +dateParse[2].replace(/^0+/, '') + "/" +dateParse[0];
-	//document.write(newEvent);
-	
-	
-			indexDate = events.date.findIndex(dateCombo);
-			eventName = events.title[indexDate];
-			document.write(eventName);
-		
-	//need to get name of event
+
 	
 	
 	events.push({ //creating event
 			date: dateCombo,
-			title: eventTitleInput.value,
+			title: eventNameRe,
 		});
 	localStorage.setItem('events', JSON.stringify(events));
 	closeModal();
 	
 	
 }
-*/
+
 
 function saveEvent()
 {
@@ -198,7 +194,7 @@ function setButtons() {
 	document.getElementById('saveButton').addEventListener('click', saveEvent);
 	document.getElementById('cancelButton').addEventListener('click', closeModal);
 	
-	//document.getElementById('rescheduleButton').addEventListener('click', rescheduleEvent);
+	document.getElementById('rescheduleButton').addEventListener('click', rescheduleEvent);
 	document.getElementById('closeButton').addEventListener('click', closeModal);
 }
 setButtons();
