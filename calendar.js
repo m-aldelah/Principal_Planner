@@ -104,6 +104,10 @@ function render() {
 			
 			const eventForDay = events.find(e => e.date == `${month+1}/${i-extraDays }/${year}`);
 			
+			if(i - extraDays == day && nav == 0){
+				daySquare.id = 'currentDay';
+			}
+			
 			if(eventForDay){ //if there is an event for the given day 
 				const eventDiv = document.createElement('div'); //create a div
 				eventDiv.classList.add('event'); //add a class
