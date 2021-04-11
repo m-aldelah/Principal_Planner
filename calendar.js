@@ -100,6 +100,7 @@ function render() {
 		if(i <= extraDays) {
 			daySquare.classList.add('extra');
 			daySquare.innerText = new Date(year, month, i-extraDays).getDate();
+			
 		}
 		else if(i > extraDays && i <= extraDays + numDays) {
 			daySquare.innerText = i - extraDays;
@@ -109,6 +110,7 @@ function render() {
 			if(i - extraDays == day && nav == 0){
 				daySquare.id = 'currentDay';
 			}
+			
 			
 			if(eventForDay){ //if there is an event for the given day 
 				const eventDiv = document.createElement('div'); //create a div
@@ -141,8 +143,6 @@ function closeModal() {
 	render();
 	
 }
-
-
 
 function rescheduleEvent(){
 	var eventNameRe = document.getElementById("rescheduleEventText").innerHTML;
@@ -187,6 +187,11 @@ function saveEvent()
 	}
 }
 
+function deleteEvent() {
+  events = events.filter(e => e.date !== clicked);
+  localStorage.setItem('events', JSON.stringify(events));
+  closeModal();
+}
 
 function setButtons() {
 	document.getElementById('nextbutton').addEventListener('click', () => {
