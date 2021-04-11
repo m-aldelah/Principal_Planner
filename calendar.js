@@ -200,7 +200,7 @@ function setButtons() {
 	});
 	document.getElementById('saveButton').addEventListener('click', saveEvent);
 	document.getElementById('cancelButton').addEventListener('click', closeModal);
-	
+	document.getElementById('deleteButton').addEventListener('click', deleteEvent);
 	document.getElementById('rescheduleButton').addEventListener('click', rescheduleEvent);
 	document.getElementById('closeButton').addEventListener('click', closeModal);
 }
