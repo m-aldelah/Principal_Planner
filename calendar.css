@@ -89,6 +89,11 @@
 .day:hover {
   background-color: #a6c5de;
 }
+
+.day + #currentDay {
+  background-color:#a6c5de;
+}
+
 #newEventModal{
   display: none;
   z-index: 20;
