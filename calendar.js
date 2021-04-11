@@ -144,6 +144,8 @@ function closeModal() {
 	
 }
 
+
+
 function rescheduleEvent(){
 	var eventNameRe = document.getElementById("rescheduleEventText").innerHTML;
 	//var indexDate;
