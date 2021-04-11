@@ -4,6 +4,7 @@ let clicked = null;
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 var rescheduleEventModal=document.getElementById('rescheduleEventModal');
 var newEventModal=document.getElementById('newEventModal');
+const deleteEventModal = document.getElementById('deleteEventModal');
 var backDrop =  document.getElementById('modalBackDrop');
 var days = document.getElementById('days');
 const eventTitleInput = document.getElementById('eventTitleInput');
@@ -15,6 +16,7 @@ function openModal(date)
 	if (eventForDay){
 		document.getElementById('rescheduleEventText').innerText = eventForDay.title;
 		rescheduleEventModal.style.display = 'block';
+		deleteEventModal.style.display = 'block';
 		
 	}else{
 		newEventModal.style.display = 'block';
@@ -130,6 +132,7 @@ function closeModal() {
 	//closing modals when pressing cancel
 	newEventModal.style.display = 'none';
 	rescheduleEventModal.style.display = 'none';
+	deleteEventModal.style.display = 'none';
 	backDrop.style.display='none';
 	
 	//clear the input thats in the next box
