@@ -12,6 +12,13 @@ const RText = document.getElementById('RText')
 var Rbutton=document.getElementById('Rbutton');
 Rbutton.addEventListener('click', setReminder);
 
+let button = document.querySelector('button');
+button.addEventListener('click', showNotification);
+var str = JSON.stringify(events);
+var str1 = JSON.stringify(str);
+var obj = JSON.parse(str1);
+var count= 0;
+
 
 
 function render() {
@@ -230,6 +237,33 @@ function saveEvent()
 }
 
 
+function showNotification(){
+		var p=0;
+		var all2='';
+	
+	
+	for(p in obj){
+		if(obj[p]==='{'||obj[p]==='['||obj[p]===']'||obj[p]==='}'||obj[p]==='\"')
+			continue;
+		all2 = all2 + obj[p];
+		if (obj[p]===':'){
+			all2=all2+'  ';
+		}
+		if(obj[p]===','){
+			count ++;
+			all2=all2+'  ';
+			
+			if (count===2){
+			all2=all2+'\n';
+			count=0;
+			}
+		}
+				
+	}
+		window.alert(all2);
+	
+
+}
 function setReminder(){
 	
 	const eventForDay = events.find(e => e.date );
