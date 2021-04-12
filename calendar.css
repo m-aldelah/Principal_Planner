@@ -10,6 +10,13 @@
 	color: #050505;
 }
 
+#Rbutton{
+	
+	margin-top: 20px;
+	padding: 10px 5px;
+	background-color: #FFFD00;
+}
+
 #calendar {
 	height: 760px;
 	width: 770px;
@@ -45,6 +52,8 @@
 #header button {
 	background-color: #2E0EFF;
 }
+
+
 
 #weekdays {
 	height: 50px;
@@ -107,6 +116,28 @@
   font-family: sans-serif;
 }
 
+
+#RModal{
+  display: none;
+  z-index: 20;
+  padding: 25px;
+  background-color: #e8f4fa;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 5px;
+  width: 350px;
+  top: 100px;
+  left: calc(50% - 175px);
+  position: absolute;
+  font-family: sans-serif;
+}
+
+
+#RText{
+	font-size: 20px;
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+	color: #0f90fa;
+}
+
 #rescheduleEventModal{
   display: none;
   z-index: 20;
@@ -120,6 +151,15 @@
   position: absolute;
   font-family: sans-serif;
 }
+
+
+
+#rescheduleEventText{
+	font-size: 20px;
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+	color: #0f90fa;
+}
+
 
 .event {
   font-size: 15px;
@@ -136,6 +176,16 @@
 	color: #0f90fa;
 }
 
+.Revent {
+  font-size: 15px;
+  padding: 2px;
+  color: #AB0540;
+  border-radius: 5px;
+  max-height: 55px;
+  overflow: hidden;
+	font-weight: bold;
+}
+
 
 .extra {
     cursor: default;
@@ -143,3 +193,4 @@
     box-shadow: none;
 	color: #787878;
 }
+

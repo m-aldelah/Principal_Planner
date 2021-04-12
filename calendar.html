@@ -7,7 +7,16 @@
 </head>
 
 <body>
+		
+	
+	<div id = "Rbutton"> 
+		<button id="remiderbutton" >Schedule Reminder</button>
+	
+	</div> 
+	
+	
 	<div id="container">
+		
 		<div id="calendar">
 			<div id="header">
 				<button id="prevbutton">&lt</button>
@@ -30,6 +39,8 @@
 		</div>
 		
 	</div>
+	
+	
 	<div id = "newEventModal"> 
 		<h2> <center> New Event </center></h2>
 		<input id="eventTitleInput" placeholder="Event Title" />
@@ -37,8 +48,30 @@
 		<button id="cancelButton">Cancel</button>
 	</div>
 	
+	
+	<div id="RModal">
+		<h2> <center> Reminder </center> </h2> 
+		<input id="RText" placeholder="Add title" />
+			<p id= "REventText"> </p>
+		
+		
+		<form>
+			
+    <div class="nativeDatePicker">
+      <label >Date:</label>
+	
+   	 <input type="date" id="newDatee" name="date">
+      
+    </div>
+</form>
+		<button id="Done"> Done </button>
+		
+	
+	</div>
+	
+	
 	<div id="deleteEventModal">
-      <h2>Event</h2>
+     
 	
 	<div id="rescheduleEventModal">
 		<h2> <center> Event </center> </h2> 
@@ -46,6 +79,7 @@
 		<form>
     <div class="nativeDatePicker">
       <label >Enter Your Rescheduling Date:</label>
+		
       <input type="date" id="newDate" name="date">
       
     </div>
@@ -58,11 +92,13 @@
 	
 	</div>
 	
+		
 
 	
 	<div id="modalBackDrop"> </div>
 	
 	
+	<span id="output"></span>
 	
 	<script src="calendar.js"></script>
 </body>
