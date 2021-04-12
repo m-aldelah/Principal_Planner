@@ -253,6 +253,35 @@
   font-size: 16px;
 }
 
+#Rbutton{
+	background: white;
+}
+
+
+#Notibuttion{
+	margin-left: 700px;
+	background-color: #2E0EFF; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#remiderbutton{
+	margin-left: 695px;
+	background-color: #2E0EFF; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 .extra {
     cursor: default;
     background-color: #FFFFFF;
