@@ -1,5 +1,4 @@
 let nav = 0;
-var newEvent;
 let clicked = null;
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 var rescheduleEventModal=document.getElementById('rescheduleEventModal');
@@ -8,21 +7,19 @@ const deleteEventModal = document.getElementById('deleteEventModal');
 var backDrop =  document.getElementById('modalBackDrop');
 var days = document.getElementById('days');
 const eventTitleInput = document.getElementById('eventTitleInput');
-function openModal(date)
-{
-	clicked = date;
-	const eventForDay = events.find(e => e.date == clicked);
-	
-	if (eventForDay){
-		document.getElementById('rescheduleEventText').innerText = eventForDay.title;
-		rescheduleEventModal.style.display = 'block';
-		deleteEventModal.style.display = 'block';
-		
-	}else{
-		newEventModal.style.display = 'block';
-	}
-	backDrop.style.display = 'block';
-}
+var RModal=document.getElementById('RModal');
+const RText = document.getElementById('RText')
+var Rbutton=document.getElementById('Rbutton');
+Rbutton.addEventListener('click', setReminder);
+
+let button = document.querySelector('button');
+button.addEventListener('click', showNotification);
+var str = JSON.stringify(events);
+var str1 = JSON.stringify(str);
+var obj = JSON.parse(str1);
+var count= 0;
+
+
 
 function render() {
 	var currDate = new Date();
@@ -109,17 +106,22 @@ function render() {
 			
 			if(i - extraDays == day && nav == 0){
 				daySquare.id = 'currentDay';
+				
 			}
 			
 			
 			if(eventForDay){ //if there is an event for the given day 
 				const eventDiv = document.createElement('div'); //create a div
 				eventDiv.classList.add('event'); //add a class
+				
 				eventDiv.innerText= eventForDay.title; //edit the text
+				
 				daySquare.appendChild(eventDiv); //put inside the dyasquare
+				
 			}
 			
 			daySquare.addEventListener('click', () => openModal(`${month+1}/${i-extraDays }/${year}`));
+			
 		}
 		else {
 			daySquare.classList.add('extra');
@@ -129,16 +131,36 @@ function render() {
 		days.appendChild(daySquare);
 	}
 }
+
+function openModal(date)
+{
+	clicked = date;
+	const eventForDay = events.find(e => e.date == clicked);
+	
+	if (eventForDay){
+		document.getElementById('rescheduleEventText').innerText = eventForDay.title;
+		rescheduleEventModal.style.display = 'block';
+		deleteEventModal.style.display = 'block';
+		
+	}else{
+		newEventModal.style.display = 'block';
+		
+	}
+	backDrop.style.display = 'block';
+}
+
 function closeModal() {
 	eventTitleInput.classList.remove('error'); //clearing error if it exists when closing
 	//closing modals when pressing cancel
 	newEventModal.style.display = 'none';
 	rescheduleEventModal.style.display = 'none';
 	deleteEventModal.style.display = 'none';
+	RModal.style.display = 'none';
 	backDrop.style.display='none';
 	
 	//clear the input thats in the next box
 	eventTitleInput.value = '';
+	RText.value = '';
 	clicked = null; //resetting the date clicked
 	render();
 	
@@ -155,11 +177,10 @@ function rescheduleEvent(){
 	
 	var dateCombo = dateParse[1].replace(/^0+/, '')+ "/" +dateParse[2].replace(/^0+/, '') + "/" +dateParse[0];
 
-	
-	
 	events.push({ //creating event
 			date: dateCombo,
 			title: eventNameRe,
+			
 		});
 	localStorage.setItem('events', JSON.stringify(events));
 	deleteEvent();
@@ -201,6 +222,31 @@ function todaysTask()
 
 
 
+
+function Done(){
+	
+	var newRescheduleDate = document.getElementById("newDatee").value;
+	var dateParse = newRescheduleDate.split("-");
+	var dateCombo = dateParse[1].replace(/^0+/, '')+ "/" +dateParse[2].replace(/^0+/, '') + "/" +dateParse[0];
+
+	if(RText.value ){
+		RText.classList.remove('error');
+		
+	events.push({ //creating reminder
+			date: dateCombo,
+			title: RText.value,
+		});
+	
+		localStorage.setItem('events', JSON.stringify(events));
+		closeModal();
+	}
+	else{
+		//send an error
+		RText.classList.add('error'); //creating a class called error
+	}
+}
+
+
 function saveEvent()
 {
 	//newEvent = eventTitleInput.value();
@@ -220,6 +266,50 @@ function saveEvent()
 		//send an error
 		eventTitleInput.classList.add('error'); //creating a class called error
 	}
+}
+
+
+function showNotification(){
+		var p=0;
+		var all2='';
+	
+	
+	for(p in obj){
+		if(obj[p]==='{'||obj[p]==='['||obj[p]===']'||obj[p]==='}'||obj[p]==='\"')
+			continue;
+		all2 = all2 + obj[p];
+		if (obj[p]===':'){
+			all2=all2+'  ';
+		}
+		if(obj[p]===','){
+			count ++;
+			all2=all2+'  ';
+			
+			if (count===2){
+			all2=all2+'\n';
+			count=0;
+			}
+		}
+				
+	}
+		window.alert(all2);
+	
+
+}
+function setReminder(){
+	
+	const eventForDay = events.find(e => e.date );
+	
+	if (eventForDay){
+		document.getElementById('RText');
+		RModal.style.display = 'block';
+	}
+	else{
+		RModal.style.display = 'block';
+	}
+	
+	backDrop.style.display = 'block';
+	
 }
 
 function deleteEvent() {
@@ -242,8 +332,13 @@ function setButtons() {
 	document.getElementById('cancelButton').addEventListener('click', closeModal);
 	document.getElementById('deleteButton').addEventListener('click', deleteEvent);
 	document.getElementById('rescheduleButton').addEventListener('click', rescheduleEvent);
+	
 	document.getElementById('closeButton').addEventListener('click', closeModal);
 	document.getElementById('showevents').addEventListener('click', todaysTask);
+	document.getElementById('Done').addEventListener('click', Done);
+
 }
+
+
 setButtons();
 render();
