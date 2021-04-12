@@ -162,10 +162,43 @@ function rescheduleEvent(){
 			title: eventNameRe,
 		});
 	localStorage.setItem('events', JSON.stringify(events));
+	deleteEvent();
 	closeModal();
 	
 	
 }
+
+function todaysTask()
+{
+
+	
+	var currDate = new Date();
+	//sets the month to be displayed offset from the current month
+	if(nav != 0) {
+		currDate.setDate(1);
+		currDate.setMonth(new Date().getMonth() + nav);
+	}
+	
+	//gets the current day, month, and year for easy use
+	var day = currDate.getDate();
+	var month = currDate.getMonth()+1;
+	var year = currDate.getFullYear();
+
+	
+	var todayDate = month + "/" + day + "/" + year;
+	//document.write(todayDate);
+	
+
+	var index = events.findIndex(x => x.date=== todayDate)
+	//document.write(index);
+	
+	//document.wirte(index);
+	var eventToday = events[index];
+	document.getElementById("printhere").innerHTML = eventToday.title;
+	//document.write(events);
+	
+}
+
 
 
 function saveEvent()
@@ -210,6 +243,7 @@ function setButtons() {
 	document.getElementById('deleteButton').addEventListener('click', deleteEvent);
 	document.getElementById('rescheduleButton').addEventListener('click', rescheduleEvent);
 	document.getElementById('closeButton').addEventListener('click', closeModal);
+	document.getElementById('showevents').addEventListener('click', todaysTask);
 }
 setButtons();
 render();
