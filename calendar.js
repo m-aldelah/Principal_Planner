@@ -332,7 +332,7 @@ function setButtons() {
 	document.getElementById('cancelButton').addEventListener('click', closeModal);
 	document.getElementById('deleteButton').addEventListener('click', deleteEvent);
 	document.getElementById('rescheduleButton').addEventListener('click', rescheduleEvent);
-	
+	document.getElementById('cancelButton2').addEventListener('click', closeModal);
 	document.getElementById('closeButton').addEventListener('click', closeModal);
 	document.getElementById('showevents').addEventListener('click', todaysTask);
 	document.getElementById('Done').addEventListener('click', Done);
